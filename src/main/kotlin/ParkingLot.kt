@@ -9,8 +9,8 @@ import java.util.*
 abstract class ParkingLot {
     private var ticketNumber = 0
     private var receiptNumber = 0
-    abstract val validVehicleClasses: Set<VehicleClass>
-    abstract val parkingSpots: ParkingSpots
+    protected abstract val validVehicleClasses: Set<VehicleClass>
+    protected abstract val parkingSpots: ParkingSpots
 
     fun park(vehicleType: VehicleType, entryDateTime: Date = Date()): ParkingTicket {
         val vehicleClass = vehicleType.vehicleClass
@@ -34,7 +34,7 @@ abstract class ParkingLot {
         return generateReceipt(entryDateTime, exitDateTime, totalFee)
     }
 
-    abstract fun calculateCost(entryDateTime: Date, exitDateTime: Date, vehicleClass: VehicleClass): Int
+    protected abstract fun calculateCost(entryDateTime: Date, exitDateTime: Date, vehicleClass: VehicleClass): Int
 
     private fun generateTicket(spotNumber: Int, vehicleClass: VehicleClass, entryDateTime: Date): ParkingTicket {
         val ticketNumber = getNextTicketNumber()
