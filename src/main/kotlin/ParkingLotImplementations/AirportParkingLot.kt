@@ -28,20 +28,27 @@ class AirportParkingLot(twoWheelerCount: UInt = 0u, fourWheelerCount: UInt = 0u)
     }
 
     private fun findFourWheelerCost(numberOfHours: Long): Int {
-        if (numberOfHours in 0 until 12) return 60
-        if (numberOfHours in 12 until 24) return 80
+        if (numberOfHours in 0 until 12)
+            return 60
+        if (numberOfHours in 12 until 24)
+            return 80
         val numberOfDays = TimeUnit.HOURS.toDays(numberOfHours)
-        if (numberOfDays > 0) return (numberOfDays * 100).toInt()
+        if (numberOfDays > 0)
+            return (numberOfDays * 100).toInt()
 
         throw InvalidDurationException()
     }
 
     private fun findTwoWheelerCost(numberOfHours: Long): Int {
-        if (numberOfHours in 0 until 1) return 0
-        if (numberOfHours in 1 until 8) return 40
-        if (numberOfHours in 8 until 24) return 60
+        if (numberOfHours in 0 until 1)
+            return 0
+        if (numberOfHours in 1 until 8)
+            return 40
+        if (numberOfHours in 8 until 24)
+            return 60
         val numberOfDays = TimeUnit.HOURS.toDays(numberOfHours)
-        if (numberOfDays > 0) return (numberOfDays * 80).toInt()
+        if (numberOfDays > 0)
+            return (numberOfDays * 80).toInt()
 
         throw InvalidDurationException()
     }

@@ -28,17 +28,23 @@ class StadiumParkingLot(twoWheelerCount: UInt = 0u, fourWheelerCount: UInt = 0u)
     }
 
     private fun findFourWheelerCost(numberOfHours: Int): Int {
-        if (numberOfHours in 0 until 4) return 30
-        if (numberOfHours in 4 until 12) return 30 + 60
-        if (numberOfHours >= 12) return 30 + 60 + 100 * (numberOfHours - 12)
+        if (numberOfHours in 0 until 4)
+            return 30
+        if (numberOfHours in 4 until 12)
+            return 30 + 60
+        if (numberOfHours >= 12)
+            return 30 + 60 + 100 * (numberOfHours - 12)
 
         throw InvalidDurationException()
     }
 
     private fun findTwoWheelerCost(numberOfHours: Int): Int {
-        if (numberOfHours in 0 until 4) return 60
-        if (numberOfHours in 4 until 12) return 60 + 120
-        if (numberOfHours >= 12) return 60 + 120 + 200 * (numberOfHours - 12)
+        if (numberOfHours in 0 until 4)
+            return 60
+        if (numberOfHours in 4 until 12)
+            return 60 + 120
+        if (numberOfHours >= 12)
+            return 60 + 120 + 200 * (numberOfHours - 12)
 
         throw InvalidDurationException()
     }
