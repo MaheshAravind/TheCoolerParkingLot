@@ -18,7 +18,7 @@ class AirportParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0) : P
 
     override fun calculateCost(entryDateTime: Date, exitDateTime: Date, vehicleClass: VehicleClass): Int {
         val diffInMillis = exitDateTime.time - entryDateTime.time
-        val hourCount = TimeUnit.MILLISECONDS.toHours(diffInMillis).toInt()
+        val hourCount = TimeUnit.MILLISECONDS.toHours(diffInMillis)
 
         return when (vehicleClass) {
             TWO_WHEELER -> findTwoWheelerCost(hourCount)
@@ -27,21 +27,21 @@ class AirportParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0) : P
         }
     }
 
-    private fun findFourWheelerCost(hourCount: Int): Int {
+    private fun findFourWheelerCost(hourCount: Long): Int {
         if (hourCount in 0 until 12) return 60
         if (hourCount in 12 until 24) return 80
-        val dayCount = TimeUnit.HOURS.toDays(hourCount.toLong()).toInt()
-        if (dayCount > 0) return dayCount * 100
+        val dayCount = TimeUnit.HOURS.toDays(hourCount)
+        if (dayCount > 0) return (dayCount * 100).toInt()
 
         throw InvalidDurationException()
     }
 
-    private fun findTwoWheelerCost(hourCount: Int): Int {
+    private fun findTwoWheelerCost(hourCount: Long): Int {
         if (hourCount in 0 until 1) return 0
         if (hourCount in 1 until 8) return 40
         if (hourCount in 8 until 24) return 60
-        val dayCount = TimeUnit.HOURS.toDays(hourCount.toLong()).toInt()
-        if (dayCount > 0) return dayCount * 80
+        val dayCount = TimeUnit.HOURS.toDays(hourCount)
+        if (dayCount > 0) return (dayCount * 80).toInt()
 
         throw InvalidDurationException()
     }
