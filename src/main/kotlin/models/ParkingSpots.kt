@@ -8,7 +8,7 @@ class ParkingSpots(vararg capacityForAllVehicleTypes: Pair<VehicleClass, Int>) {
 
     init {
         for (capacityPerType in capacityForAllVehicleTypes)
-            freeSpotsForAllVehicleFeeTypes[capacityPerType.first] = Array(capacityPerType.second) { it }.toHashSet()
+            freeSpotsForAllVehicleFeeTypes[capacityPerType.first] = Array(capacityPerType.second) { it + 1 }.toHashSet()
     }
 
     fun findAndLockSpot(vehicleClass: VehicleClass): Int {

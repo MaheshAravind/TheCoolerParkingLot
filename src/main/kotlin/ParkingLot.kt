@@ -7,8 +7,8 @@ import models.VehicleClass
 import java.util.*
 
 abstract class ParkingLot {
-    private var ticketNumber = 0
-    private var receiptNumber = 0
+    private var ticketNumber = 1
+    private var receiptNumber = 1
     protected abstract val validVehicleClasses: Set<VehicleClass>
     protected abstract val parkingSpots: ParkingSpots
 
