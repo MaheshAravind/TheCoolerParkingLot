@@ -72,7 +72,7 @@ class MallParkingLotTest {
     }
 
     @Test
-    fun `should get 20 fee when motorcycle is parked for 2 hours`() {
+    fun `should have to pay 20 as fee when motorcycle is parked for 2 hours`() {
         val phoenixMarketcityParkingLot = MallParkingLot(twoWheelerCount = 1u)
         val entryDate = Date(1676410567394)
         val exitDate = Date(1676410567394 + 1000 * 3600 * 2)
@@ -85,7 +85,7 @@ class MallParkingLotTest {
     }
 
     @Test
-    fun `should get 80 fee when suv is parked for 4 hours`() {
+    fun `should have to pay 80 as fee when suv is parked for 4 hours`() {
         val phoenixMarketcityParkingLot = MallParkingLot(fourWheelerCount = 1u)
         val entryDate = Date(1676410567394)
         val exitDate = Date(1676410567394 + 1000 * 3600 * 4)
@@ -98,7 +98,7 @@ class MallParkingLotTest {
     }
 
     @Test
-    fun `should get 50 fee when truck is parked for 1 hour`() {
+    fun `should have to pay 50 as fee when truck is parked for 1 hour`() {
         val phoenixMarketcityParkingLot = MallParkingLot(bigVehicleCount = 1u)
         val entryDate = Date(1676410567394)
         val exitDate = Date(1676410567394 + 1000 * 3600 * 1)
