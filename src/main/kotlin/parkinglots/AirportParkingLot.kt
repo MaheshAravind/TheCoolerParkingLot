@@ -1,4 +1,4 @@
-package ParkingLotImplementations
+package parkinglots
 
 import ParkingLot
 import exceptions.InvalidDurationException

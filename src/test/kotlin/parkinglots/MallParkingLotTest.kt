@@ -1,4 +1,4 @@
-package ParkingLotImplementations
+package parkinglots
 
 import entities.ParkingReceipt
 import entities.ParkingTicket
