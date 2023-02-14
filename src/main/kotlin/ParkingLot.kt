@@ -17,16 +17,16 @@ abstract class ParkingLot {
     }
 
     fun unpark(parkingTicket: ParkingTicket, exitDateTime: Date = Date()): ParkingReceipt {
-        val receiptNumber = getNextReceiptNumber()
-
         val vehicleClass = parkingTicket.getVehicleClass()
+        if (vehicleClass !in validVehicleClasses) throw InvalidVehicleTypeException()
+
         val spotNumber = parkingTicket.getSpotNumber()
         parkingSpots.freeSpot(vehicleClass, spotNumber)
 
         val entryDateTime = parkingTicket.getEntryDateTime()
         val totalFee = calculateCost(entryDateTime, exitDateTime, vehicleClass)
 
-        return ParkingReceipt(receiptNumber, entryDateTime, exitDateTime, totalFee)
+        return generateReceipt(entryDateTime, exitDateTime, totalFee)
     }
 
     abstract fun calculateCost(entryDateTime: Date, exitDateTime: Date, vehicleClass: VehicleClass): Int
@@ -34,6 +34,11 @@ abstract class ParkingLot {
     private fun generateTicket(spotNumber: Int, vehicleClass: VehicleClass, entryDateTime: Date): ParkingTicket {
         val ticketNumber = getNextTicketNumber()
         return ParkingTicket(ticketNumber, spotNumber, entryDateTime, vehicleClass)
+    }
+
+    private fun generateReceipt(entryDateTime: Date, exitDateTime: Date, totalFee: Int): ParkingReceipt {
+        val receiptNumber = getNextReceiptNumber()
+        return ParkingReceipt(receiptNumber, entryDateTime, exitDateTime, totalFee)
     }
 
     private fun getNextTicketNumber(): Int {
