@@ -1,6 +1,6 @@
 import java.util.*
 
-class ParkingTicket(
+data class ParkingTicket(
     private val ticketNumber: Int,
     private val spotNumber: Int,
     private val entryDateTime: Date,

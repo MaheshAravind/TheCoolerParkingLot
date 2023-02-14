@@ -1,6 +1,6 @@
 import java.util.*
 
-class ParkingReceipt(
+data class ParkingReceipt(
     private val receiptNumber: Int,
     private val entryDateTime: Date,
     private val exitDateTime: Date,
