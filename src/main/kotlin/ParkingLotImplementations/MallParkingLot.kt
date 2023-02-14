@@ -1,6 +1,7 @@
 package ParkingLotImplementations
 
 import ParkingLot
+import exceptions.InvalidDurationException
 import models.ParkingSpots
 import models.VehicleClass
 import models.VehicleClass.*
@@ -21,6 +22,7 @@ class MallParkingLot(twoWheelerCount: UInt = 0u, fourWheelerCount: UInt = 0u, bi
     override fun calculateCost(entryDateTime: Date, exitDateTime: Date, vehicleClass: VehicleClass): Int {
         val timeDifferenceInMilliseconds = exitDateTime.time - entryDateTime.time
         val hourCount = TimeUnit.MILLISECONDS.toHours(timeDifferenceInMilliseconds).toInt()
+        if (hourCount < 0) throw InvalidDurationException()
 
         val rate = ratePerHour(vehicleClass)
         val totalCost = rate * hourCount
