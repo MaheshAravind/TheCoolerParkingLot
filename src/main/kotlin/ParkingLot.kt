@@ -7,7 +7,7 @@ abstract class ParkingLot {
     abstract val validVehicleClasses: Set<VehicleClass>
     abstract val parkingSpots: ParkingSpots
 
-    fun park(vehicleType: VehicleType, entryTime: Date = Date()): ParkingTicket {
+    fun park(vehicleType: VehicleType, entryDateTime: Date = Date()): ParkingTicket {
         val vehicleClass = vehicleType.vehicleClass
         if (vehicleClass !in validVehicleClasses) throw InvalidVehicleTypeException()
 
@@ -31,10 +31,9 @@ abstract class ParkingLot {
 
     abstract fun calculateCost(entryDateTime: Date, exitDateTime: Date, vehicleClass: VehicleClass): Int
 
-    private fun generateTicket(spotNumber: Int, vehicleClass: VehicleClass): ParkingTicket {
+    private fun generateTicket(spotNumber: Int, vehicleClass: VehicleClass, entryDateTime: Date): ParkingTicket {
         val ticketNumber = getNextTicketNumber()
-        val currentDateTime = Date()
-        return ParkingTicket(ticketNumber, spotNumber, currentDateTime, vehicleClass)
+        return ParkingTicket(ticketNumber, spotNumber, entryDateTime, vehicleClass)
     }
 
     private fun getNextTicketNumber(): Int {
