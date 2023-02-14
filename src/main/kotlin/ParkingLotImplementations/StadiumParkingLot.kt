@@ -3,7 +3,6 @@ package ParkingLotImplementations
 import ParkingLot
 import exceptions.InvalidDurationException
 import exceptions.InvalidVehicleTypeException
-import models.EndExclusiveInterval
 import models.ParkingSpots
 import models.VehicleClass
 import models.VehicleClass.FOUR_WHEELER
@@ -12,12 +11,6 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 class StadiumParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0) : ParkingLot() {
-    companion object {
-        val INTERVAL_ONE = EndExclusiveInterval(0, 4)
-        val INTERVAL_TWO = EndExclusiveInterval(4, 12)
-        val INTERVAL_THREE = EndExclusiveInterval(12)
-    }
-
     override val validVehicleClasses: Set<VehicleClass> = setOf(TWO_WHEELER, FOUR_WHEELER)
 
     override val parkingSpots: ParkingSpots =
@@ -35,17 +28,17 @@ class StadiumParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0) : P
     }
 
     private fun findFourWheelerCost(numberOfHours: Int): Int {
-        if (INTERVAL_ONE.contains(numberOfHours)) return 30
-        if (INTERVAL_TWO.contains(numberOfHours)) return 30 + 60
-        if (INTERVAL_THREE.contains(numberOfHours)) return 30 + 60 + 100 * (numberOfHours - 12)
+        if (numberOfHours in 0 until 4) return 30
+        if (numberOfHours in 4 until 12) return 30 + 60
+        if (numberOfHours >= 12) return 30 + 60 + 100 * (numberOfHours - 12)
 
         throw InvalidDurationException()
     }
 
     private fun findTwoWheelerCost(numberOfHours: Int): Int {
-        if (INTERVAL_ONE.contains(numberOfHours)) return 60
-        if (INTERVAL_TWO.contains(numberOfHours)) return 60 + 120
-        if (INTERVAL_THREE.contains(numberOfHours)) return 60 + 120 + 200 * (numberOfHours - 12)
+        if (numberOfHours in 0 until 4) return 60
+        if (numberOfHours in 4 until 12) return 60 + 120
+        if (numberOfHours >= 12) return 60 + 120 + 200 * (numberOfHours - 12)
 
         throw InvalidDurationException()
     }
