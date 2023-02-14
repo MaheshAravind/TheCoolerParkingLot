@@ -1,3 +1,5 @@
+package models
+
 enum class VehicleClass {
     TWO_WHEELER,
     FOUR_WHEELER,

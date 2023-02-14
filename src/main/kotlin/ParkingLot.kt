@@ -1,4 +1,9 @@
+import entities.ParkingReceipt
+import entities.ParkingTicket
+import entities.VehicleType
 import exceptions.InvalidVehicleTypeException
+import models.ParkingSpots
+import models.VehicleClass
 import java.util.*
 
 abstract class ParkingLot {

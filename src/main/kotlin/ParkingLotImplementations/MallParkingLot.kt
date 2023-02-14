@@ -1,4 +1,9 @@
-import VehicleClass.*
+package ParkingLotImplementations
+
+import ParkingLot
+import models.ParkingSpots
+import models.VehicleClass
+import models.VehicleClass.*
 import java.util.*
 import java.util.concurrent.TimeUnit
 

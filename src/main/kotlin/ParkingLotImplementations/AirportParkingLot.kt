@@ -1,17 +1,16 @@
-import VehicleClass.FOUR_WHEELER
-import VehicleClass.TWO_WHEELER
+package ParkingLotImplementations
+
+import ParkingLot
 import exceptions.InvalidDurationException
 import exceptions.InvalidVehicleTypeException
+import models.ParkingSpots
+import models.VehicleClass
+import models.VehicleClass.FOUR_WHEELER
+import models.VehicleClass.TWO_WHEELER
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class StadiumParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0) : ParkingLot() {
-    companion object {
-        val INTERVAL_ONE = EndExclusiveInterval(0, 4)
-        val INTERVAL_TWO = EndExclusiveInterval(4, 12)
-        val INTERVAL_THREE = EndExclusiveInterval(12)
-    }
-
+class AirportParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0) : ParkingLot() {
     override val validVehicleClasses: Set<VehicleClass> = setOf(TWO_WHEELER, FOUR_WHEELER)
 
     override val parkingSpots: ParkingSpots =
@@ -29,17 +28,20 @@ class StadiumParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0) : P
     }
 
     private fun findFourWheelerCost(hourCount: Int): Int {
-        if (INTERVAL_ONE.contains(hourCount)) return 30
-        if (INTERVAL_TWO.contains(hourCount)) return 30 + 60
-        if (INTERVAL_THREE.contains(hourCount)) return 30 + 60 + 100 * (hourCount - 12)
+        if (hourCount in 0 until 12) return 60
+        if (hourCount in 12 until 24) return 80
+        val dayCount = TimeUnit.HOURS.toDays(hourCount.toLong()).toInt()
+        if (dayCount > 0) return dayCount * 100
 
         throw InvalidDurationException()
     }
 
     private fun findTwoWheelerCost(hourCount: Int): Int {
-        if (INTERVAL_ONE.contains(hourCount)) return 60
-        if (INTERVAL_TWO.contains(hourCount)) return 60 + 120
-        if (INTERVAL_THREE.contains(hourCount)) return 60 + 120 + 200 * (hourCount - 12)
+        if (hourCount in 0 until 1) return 0
+        if (hourCount in 1 until 8) return 40
+        if (hourCount in 8 until 24) return 60
+        val dayCount = TimeUnit.HOURS.toDays(hourCount.toLong()).toInt()
+        if (dayCount > 0) return dayCount * 80
 
         throw InvalidDurationException()
     }

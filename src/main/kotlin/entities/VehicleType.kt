@@ -1,3 +1,7 @@
+package entities
+
+import models.VehicleClass
+
 enum class VehicleType(val vehicleClass: VehicleClass) {
     MOTORCYCLE(VehicleClass.TWO_WHEELER),
     SCOOTER(VehicleClass.TWO_WHEELER),

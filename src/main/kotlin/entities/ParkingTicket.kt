@@ -1,3 +1,6 @@
+package entities
+
+import models.VehicleClass
 import java.util.*
 
 data class ParkingTicket(

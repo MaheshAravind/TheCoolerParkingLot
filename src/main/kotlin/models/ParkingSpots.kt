@@ -1,3 +1,5 @@
+package models
+
 import exceptions.InvalidVehicleTypeException
 import exceptions.ParkingLotFullException
 
