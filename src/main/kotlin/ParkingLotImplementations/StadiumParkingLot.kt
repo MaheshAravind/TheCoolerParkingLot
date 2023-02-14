@@ -17,8 +17,8 @@ class StadiumParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0) : P
         ParkingSpots(TWO_WHEELER to twoWheelerCount, FOUR_WHEELER to fourWheelerCount)
 
     override fun calculateCost(entryDateTime: Date, exitDateTime: Date, vehicleClass: VehicleClass): Int {
-        val diffInMillis = exitDateTime.time - entryDateTime.time
-        val numberOfHours = TimeUnit.MILLISECONDS.toHours(diffInMillis).toInt()
+        val timeDifferenceInMilliseconds = exitDateTime.time - entryDateTime.time
+        val numberOfHours = TimeUnit.MILLISECONDS.toHours(timeDifferenceInMilliseconds).toInt()
 
         return when (vehicleClass) {
             TWO_WHEELER -> findTwoWheelerCost(numberOfHours)

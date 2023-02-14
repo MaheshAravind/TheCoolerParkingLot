@@ -14,8 +14,8 @@ class MallParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0, bigVeh
         ParkingSpots(TWO_WHEELER to twoWheelerCount, FOUR_WHEELER to fourWheelerCount, BIG_VEHICLE to bigVehicleCount)
 
     override fun calculateCost(entryDateTime: Date, exitDateTime: Date, vehicleClass: VehicleClass): Int {
-        val diffInMillis = exitDateTime.time - entryDateTime.time
-        val hourCount = TimeUnit.MILLISECONDS.toHours(diffInMillis).toInt()
+        val timeDifferenceInMilliseconds = exitDateTime.time - entryDateTime.time
+        val hourCount = TimeUnit.MILLISECONDS.toHours(timeDifferenceInMilliseconds).toInt()
 
         val rate = ratePerHour(vehicleClass)
         val totalCost = rate * hourCount
