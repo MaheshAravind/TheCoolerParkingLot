@@ -3,12 +3,13 @@ package models
 import exceptions.InvalidVehicleTypeException
 import exceptions.ParkingLotFullException
 
-class ParkingSpots(vararg capacityForAllVehicleTypes: Pair<VehicleClass, Int>) {
+class ParkingSpots(vararg capacityForAllVehicleTypes: Pair<VehicleClass, UInt>) {
     private val freeSpotsForAllVehicleFeeTypes = HashMap<VehicleClass, HashSet<Int>>()
 
     init {
         for (capacityPerType in capacityForAllVehicleTypes)
-            freeSpotsForAllVehicleFeeTypes[capacityPerType.first] = Array(capacityPerType.second) { it + 1 }.toHashSet()
+            freeSpotsForAllVehicleFeeTypes[capacityPerType.first] =
+                Array(capacityPerType.second.toInt()) { it + 1 }.toHashSet()
     }
 
     fun findAndLockSpot(vehicleClass: VehicleClass): Int {

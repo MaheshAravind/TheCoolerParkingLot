@@ -7,11 +7,16 @@ import models.VehicleClass.*
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class MallParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0, bigVehicleCount: Int = 0) : ParkingLot() {
+class MallParkingLot(twoWheelerCount: UInt = 0u, fourWheelerCount: UInt = 0u, bigVehicleCount: UInt = 0u) :
+    ParkingLot() {
     override val validVehicleClasses: Set<VehicleClass> = setOf(TWO_WHEELER, FOUR_WHEELER, BIG_VEHICLE)
 
     override val parkingSpots: ParkingSpots =
-        ParkingSpots(TWO_WHEELER to twoWheelerCount, FOUR_WHEELER to fourWheelerCount, BIG_VEHICLE to bigVehicleCount)
+        ParkingSpots(
+            TWO_WHEELER to twoWheelerCount,
+            FOUR_WHEELER to fourWheelerCount,
+            BIG_VEHICLE to bigVehicleCount
+        )
 
     override fun calculateCost(entryDateTime: Date, exitDateTime: Date, vehicleClass: VehicleClass): Int {
         val timeDifferenceInMilliseconds = exitDateTime.time - entryDateTime.time

@@ -10,7 +10,7 @@ import models.VehicleClass.TWO_WHEELER
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class AirportParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0) : ParkingLot() {
+class AirportParkingLot(twoWheelerCount: UInt = 0u, fourWheelerCount: UInt = 0u) : ParkingLot() {
     override val validVehicleClasses: Set<VehicleClass> = setOf(TWO_WHEELER, FOUR_WHEELER)
 
     override val parkingSpots: ParkingSpots =
