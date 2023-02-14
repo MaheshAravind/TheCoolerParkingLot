@@ -14,7 +14,8 @@ class StadiumParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0) : P
 
     override val validVehicleClasses: Set<VehicleClass> = setOf(TWO_WHEELER, FOUR_WHEELER)
 
-    override val freeSpots: FreeSpots = FreeSpots(TWO_WHEELER to twoWheelerCount, FOUR_WHEELER to fourWheelerCount)
+    override val parkingSpots: ParkingSpots =
+        ParkingSpots(TWO_WHEELER to twoWheelerCount, FOUR_WHEELER to fourWheelerCount)
 
     override fun calculateCost(entryDateTime: Date, exitDateTime: Date, vehicleClass: VehicleClass): Int {
         val diffInMillis = exitDateTime.time - entryDateTime.time

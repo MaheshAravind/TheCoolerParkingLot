@@ -8,7 +8,8 @@ import java.util.concurrent.TimeUnit
 class AirportParkingLot(twoWheelerCount: Int = 0, fourWheelerCount: Int = 0) : ParkingLot() {
     override val validVehicleClasses: Set<VehicleClass> = setOf(TWO_WHEELER, FOUR_WHEELER)
 
-    override val freeSpots: FreeSpots = FreeSpots(TWO_WHEELER to twoWheelerCount, FOUR_WHEELER to fourWheelerCount)
+    override val parkingSpots: ParkingSpots =
+        ParkingSpots(TWO_WHEELER to twoWheelerCount, FOUR_WHEELER to fourWheelerCount)
 
     override fun calculateCost(entryDateTime: Date, exitDateTime: Date, vehicleClass: VehicleClass): Int {
         val diffInMillis = exitDateTime.time - entryDateTime.time

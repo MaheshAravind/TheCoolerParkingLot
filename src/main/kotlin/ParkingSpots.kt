@@ -1,7 +1,7 @@
 import exceptions.InvalidVehicleTypeException
 import exceptions.ParkingLotFullException
 
-class FreeSpots(vararg capacityForAllVehicleTypes: Pair<VehicleClass, Int>) {
+class ParkingSpots(vararg capacityForAllVehicleTypes: Pair<VehicleClass, Int>) {
     private val freeSpotsForAllVehicleFeeTypes = HashMap<VehicleClass, HashSet<Int>>()
 
     init {

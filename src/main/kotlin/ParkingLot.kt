@@ -5,13 +5,15 @@ abstract class ParkingLot {
     private var ticketNumber = 0
     private var receiptNumber = 0
     abstract val validVehicleClasses: Set<VehicleClass>
-    abstract val freeSpots: FreeSpots
+    abstract val parkingSpots: ParkingSpots
 
     fun park(vehicleType: VehicleType, entryTime: Date = Date()): ParkingTicket {
         val vehicleClass = vehicleType.vehicleClass
         if (vehicleClass !in validVehicleClasses) throw InvalidVehicleTypeException()
-        val spotNumber = freeSpots.findAndLockSpot(vehicleClass)
-        return generateTicket(spotNumber, vehicleClass)
+
+        val spotNumber = parkingSpots.findAndLockSpot(vehicleClass)
+
+        return generateTicket(spotNumber, vehicleClass, entryDateTime)
     }
 
     fun unpark(parkingTicket: ParkingTicket, exitDateTime: Date = Date()): ParkingReceipt {
@@ -19,7 +21,7 @@ abstract class ParkingLot {
 
         val vehicleClass = parkingTicket.getVehicleClass()
         val spotNumber = parkingTicket.getSpotNumber()
-        freeSpots.freeSpot(vehicleClass, spotNumber)
+        parkingSpots.freeSpot(vehicleClass, spotNumber)
 
         val entryDateTime = parkingTicket.getEntryDateTime()
         val totalFee = calculateCost(entryDateTime, exitDateTime, vehicleClass)
