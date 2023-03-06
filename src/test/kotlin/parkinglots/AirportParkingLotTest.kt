@@ -146,4 +146,14 @@ class AirportParkingLotTest {
 
         assertEquals(expectedReceipt, parkingReceipt)
     }
+
+    @Test
+    fun `should not allow exit time to be before entry time`() {
+        val heathrowAirportParkingLot = AirportParkingLot(twoWheelerCount = 1u, fourWheelerCount = 1u)
+        val entryDate = Date(1676410567394)
+        val exitDate = Date(1676410567394 - 1000 * 3600 * 1)
+        val parkingTicket = heathrowAirportParkingLot.park(VehicleType.CAR, entryDate)
+
+        assertThrows(InvalidDurationException::class.java){heathrowAirportParkingLot.unpark(parkingTicket, exitDate)}
+    }
 }

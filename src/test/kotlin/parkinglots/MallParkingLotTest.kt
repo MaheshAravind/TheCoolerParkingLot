@@ -3,6 +3,7 @@ package parkinglots
 import entities.ParkingReceipt
 import entities.ParkingTicket
 import entities.VehicleType
+import exceptions.InvalidDurationException
 import exceptions.ParkingLotFullException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
@@ -123,5 +124,15 @@ class MallParkingLotTest {
             phoenixMarketcityParkingLot.park(VehicleType.BUS)
             phoenixMarketcityParkingLot.park(VehicleType.TRUCK)
         }
+    }
+
+    @Test
+    fun `should not allow exit time to be before entry time`() {
+        val phoenixMarketcityParkingLot = MallParkingLot(bigVehicleCount = 1u)
+        val entryDate = Date(1676410567394)
+        val exitDate = Date(1676410567394 - 1000 * 3600 * 1)
+        val parkingTicket = phoenixMarketcityParkingLot.park(VehicleType.TRUCK, entryDate)
+
+        assertThrows(InvalidDurationException::class.java){phoenixMarketcityParkingLot.unpark(parkingTicket, exitDate)}
     }
 }
