@@ -14,7 +14,8 @@ abstract class ParkingLot {
 
     fun park(vehicleType: VehicleType, entryDateTime: Date = Date()): ParkingTicket {
         val vehicleClass = vehicleType.vehicleClass
-        if (vehicleClass !in validVehicleClasses) throw InvalidVehicleTypeException()
+        if (vehicleClass !in validVehicleClasses)
+            throw InvalidVehicleTypeException()
 
         val spotNumber = parkingSpots.findAndLockSpot(vehicleClass)
 

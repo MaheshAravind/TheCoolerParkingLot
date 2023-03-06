@@ -145,4 +145,13 @@ class StadiumParkingLotTest {
         assertThrows(InvalidDurationException::class.java){chepaukStadiumParkingLot.unpark(bikeParkingTicket, exitDate)}
         assertThrows(InvalidDurationException::class.java){chepaukStadiumParkingLot.unpark(carParkingTicket, exitDate)}
     }
+
+    @Test
+    fun `should not allow a bus or a truck to be parked in stadium`() {
+        val chepaukStadiumParkingLot = StadiumParkingLot(twoWheelerCount = 1u, fourWheelerCount = 1u)
+        val entryDate = Date(1676410567394)
+
+        assertThrows(InvalidVehicleTypeException::class.java){chepaukStadiumParkingLot.park(VehicleType.BUS, entryDate)}
+        assertThrows(InvalidVehicleTypeException::class.java){chepaukStadiumParkingLot.park(VehicleType.TRUCK, entryDate)}
+    }
 }

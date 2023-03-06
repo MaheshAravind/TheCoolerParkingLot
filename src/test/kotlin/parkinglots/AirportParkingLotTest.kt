@@ -156,4 +156,14 @@ class AirportParkingLotTest {
 
         assertThrows(InvalidDurationException::class.java){heathrowAirportParkingLot.unpark(parkingTicket, exitDate)}
     }
+
+    @Test
+    fun `should not allow a bus or a truck to be parked in airport`() {
+        val heathrowAirportParkingLot = AirportParkingLot(twoWheelerCount = 1u, fourWheelerCount = 1u)
+        val entryDate = Date(1676410567394)
+
+
+        assertThrows(InvalidVehicleTypeException::class.java){heathrowAirportParkingLot.park(VehicleType.BUS, entryDate)}
+        assertThrows(InvalidVehicleTypeException::class.java){heathrowAirportParkingLot.park(VehicleType.TRUCK, entryDate)}
+    }
 }
